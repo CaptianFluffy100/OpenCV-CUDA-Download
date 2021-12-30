@@ -1,0 +1,23 @@
+YouTube Video:
+
+################### Conky Website's Used ###################
+
+https://www.how2shout.com/linux/how-to-install-conky-system-monitor-on-ubuntu-20-04-lts/
+
+https://www.how2shout.com/linux/conky-system-monitor-widget-to-view-linux-process-cpu-and-memory/
+
+# Commands to Get Conky Installed
+
+sudo apt-get install conky-all
+cp /etc/conky/conky.conf ~/.conkyrc
+
+
+################### Nvidia Toolkit ###################
+
+https://developer.nvidia.com/cuda-toolkit-archive
+
+HINT: When you run the file "accept" Nvidia's terms of servce.  Then you will get a list of all the items that will be installed.  MAKE SURE that the DRIVER (First item on the list [It is a Pearent Item]) is unselected before you continue with the install. (You alread have the driver and so you don't need to install it again).
+
+################### Nvidia CUDNN ###################
+
+https://developer.nvidia.com/cudnn

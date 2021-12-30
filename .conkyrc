@@ -1,0 +1,115 @@
+-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+--[[
+Conky, a system monitor, based on torsmo
+
+Any original torsmo code is licensed under the BSD license
+
+All code written since the fork of torsmo is licensed under the GPL
+
+Please see COPYING for details
+
+Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+Copyright (c) 2005-2012 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+]]
+
+conky.config = {
+    double_buffer = true,
+    alignment = 'top_right',
+    background = false,
+    border_width = 1,
+    cpu_avg_samples = 2,
+	default_color = 'white',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=12',
+    gap_x = 60,
+    gap_y = 50,
+    minimum_height = 5,
+	minimum_width = 5,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = false,
+    show_graph_range = false
+}
+
+conky.text = [[
+${scroll 16 $nodename - $sysname $kernel on $machine | }
+$hr
+${color grey}Uptime:$color $uptime
+${color grey}Frequency (in MHz):$color $freq
+${color grey}Frequency (in GHz):$color $freq_g
+${color grey}RAM Usage:$color $mem/$memmax - $memperc% ${membar 4}
+${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 4}
+${color grey}CPU Usage:$color $cpu% ${color white} $alignr ${cpugraph 15,200} 
+${color lightgrey}CPU1: ${color white}${cpu cpu1}% $alignr ${freq (1)} MHz $alignr ${color #ff1100}${cpugraph cpu1 15,150} 
+${color lightgrey}CPU2: ${color white}${cpu cpu2}% $alignr ${freq (2)} MHz $alignr ${color #ff9d00}${cpugraph cpu2 15,150} 
+${color lightgrey}CPU3: ${color white}${cpu cpu3}% $alignr ${freq (3)} MHz $alignr ${color #fff700}${cpugraph cpu3 15,150} 
+${color lightgrey}CPU4: ${color white}${cpu cpu4}% $alignr ${freq (4)} MHz $alignr ${color #b7ff00}${cpugraph cpu4 15,150} 
+${color lightgrey}CPU5: ${color white}${cpu cpu5}% $alignr ${freq (5)} MHz $alignr ${color #00ff04}${cpugraph cpu5 15,150} 
+${color lightgrey}CPU6: ${color white}${cpu cpu6}% $alignr ${freq (6)} MHz $alignr ${color #00ffb3}${cpugraph cpu6 15,150} 
+${color lightgrey}CPU7: ${color white}${cpu cpu7}% $alignr ${freq (7)} MHz $alignr ${color #008cff}${cpugraph cpu7 15,150} 
+${color lightgrey}CPU8: ${color white}${cpu cpu8}% $alignr ${freq (8)} MHz $alignr ${color #1900ff}${cpugraph cpu8 15,150} 
+${color lightgrey}CPU9: ${color white}${cpu cpu9}% $alignr ${freq (9)} MHz $alignr ${color #5500ff}${cpugraph cpu9 15,150} 
+${color lightgrey}CPU10: ${color white}${cpu cpu10}% $alignr ${freq (10)} MHz $alignr ${color #9000ff}${cpugraph cpu10 15,150} 
+${color lightgrey}CPU11: ${color white}${cpu cpu11}% $alignr ${freq (11)} MHz $alignr ${color #ff00ea}${cpugraph cpu11 15,150} 
+${color lightgrey}CPU12: ${color white}${cpu cpu12}% $alignr ${freq (12)} MHz $alignr ${color #ff006f}${cpugraph cpu12 15,150} 
+${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
+$hr
+${color grey}File systems:
+ / Ubuntu: $color${fs_used /}/${fs_size /} ${fs_bar 6 /}
+${color grey}Networking WiFi:
+Upload:$color ${upspeed wlo1} ${color grey}
+${color red} ${upspeedgraph wlo1} ${color grey} 
+Download:$color ${downspeed wlo1}
+${color green} ${downspeedgraph wlo1} 
+${color grey}Networking Eth:
+Upload:$color ${upspeed eth0} ${color grey} - Download:$color ${downspeed eth0}
+$hr
+${color grey} Name  $alignr PID    $alignr CPU%   $alignr MEM%
+${color lightgrey} $alignr ${top name 1} $alignr ${top pid 1} $alignr ${top cpu 1} $alignr ${top mem 1}
+${color lightgrey} $alignr ${top name 2} $alignr ${top pid 2} $alignr ${top cpu 2} $alignr ${top mem 2}
+${color lightgrey} $alignr ${top name 3} $alignr ${top pid 3} $alignr ${top cpu 3} $alignr ${top mem 3}
+${color lightgrey} $alignr ${top name 4} $alignr ${top pid 4} $alignr ${top cpu 4} $alignr ${top mem 4}
+$hr
+GPU STATS:
+${color1}CUDA & CUDNN Version: ${exec nvidia-smi | grep CUDA | cut -c 70-74}$color| ${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_MAJOR" | cut -c 21}.${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_MINOR" | cut -c 21}.${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_PATCHLEVEL" | cut -c 26} $color
+# ${color1}CUDNN Version: ${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_MAJOR" | cut -c 21}.${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_MINOR" | cut -c 21}.${exec cat /usr/include/cudnn_version.h | grep "#define CUDNN_PATCHLEVEL" | cut -c 26} $color
+${color1}Driver Version: ${exec nvidia-smi | grep CUDA | cut -c 43-55} $color
+${color1}GPU: ${color #FCAF3E}${exec nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits} $color
+${color1}GPU Temperature ${color}  ${execi 60 nvidia-settings -query [gpu:0]/GPUCoreTemp -t} °C
+${color1}GPU Utilization ${color}  ${exec nvidia-smi | grep % | cut -c 61-63} %
+${color1}VRAM Utilization ${color} ${exec nvidia-smi | grep % | cut -c 37-40} MB / ${exec nvidia-smi | grep % | cut -c 48-51} MB
+${color1}GPU Power Draw ${color} ${exec nvidia-smi | grep % | cut -c 21-23} W / ${exec nvidia-smi | grep % | cut -c 28-30} W
+$hr
+${color1}OpenCV Version: ${exec pkg-config --modversion opencv4} $color
+]]
