@@ -22,3 +22,10 @@ HINT: When you run the file "accept" Nvidia's terms of servce.  Then you will ge
 ################### Nvidia CUDNN ###################
 
 https://developer.nvidia.com/cudnn
+
+################### EXPORT LIBRARIES ###################
+
+export CUDA_HOME=/usr/local/cuda-11.4
+export PATH=${CUDA_HOME}/bin:${PATH}
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
